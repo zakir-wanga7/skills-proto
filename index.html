@@ -1,27 +1,47 @@
 <!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تعلّم مهارة مجانًا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:system-ui,"Segoe UI",Tahoma,sans-serif;background:#f4efec;color:#251f21}
-main{max-width:640px;margin:0 auto;background:#fff;min-height:100vh;padding:24px}
-h1{font-size:28px;margin:0 0 8px}h2{font-size:20px}p{line-height:1.8}.sub{color:#585254}
-button{font:inherit;padding:12px 16px;border:1px solid #d8d4d2;background:#fff;border-radius:6px;cursor:pointer;margin:4px 0;min-height:44px}
-button.p{background:#251f21;color:#fff}button.opt{display:block;width:100%;text-align:start}
-button.ok{border-color:#73a89a;background:#e8f2ef}button.bad{border-color:#ed313e}
-.card{border:1px solid #eae9ea;border-radius:10px;padding:16px;margin:12px 0}
-pre{direction:ltr;text-align:left;background:#f4efec;padding:14px;border-radius:8px;overflow-x:auto}
-input{font:inherit;width:100%;box-sizing:border-box;padding:12px;margin:6px 0;border:1px solid #d8d4d2;border-radius:6px}
-.t{color:#73a89a;font-weight:600}.err{color:#ed313e}
+:root{--bg:#0f1226;--card:#1a1e3d;--ink:#f4f5ff;--mut:#a9aed6;--a:#7c5cff;--b:#22d3ee;--ok:#34d399;--bad:#fb7185}
+*{box-sizing:border-box}
+body{margin:0;font-family:Cairo,system-ui,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);background-image:radial-gradient(circle at 15% 0%,#2b2470 0,transparent 45%),radial-gradient(circle at 100% 30%,#0e4a6b 0,transparent 40%);background-attachment:fixed}
+main{max-width:720px;margin:0 auto;min-height:100vh;padding:20px 18px 48px;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+h1{font-size:30px;font-weight:800;margin:0 0 8px;line-height:1.3}h2{font-size:20px;margin:24px 0 8px}p{line-height:1.9;margin:8px 0}
+.sub{color:var(--mut)}
+.hero{text-align:center;padding:36px 12px 24px}
+.hero .big{font-size:64px;display:inline-block;animation:float 3s ease-in-out infinite}
+.grad{background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bar{height:10px;background:#ffffff18;border-radius:99px;overflow:hidden;margin:10px 0}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--b));border-radius:99px;transition:width .6s}
+.card{background:var(--card);border:1px solid #ffffff14;border-radius:20px;padding:18px;margin:14px 0;transition:transform .2s,box-shadow .2s;animation:fade .5s ease both}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px #0006}
+.ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:30px;margin-bottom:10px}
+button{font:inherit;font-weight:600;padding:12px 20px;border:1px solid #ffffff2a;background:#ffffff10;color:var(--ink);border-radius:14px;cursor:pointer;margin:4px 0;min-height:48px;transition:transform .15s,background .2s}
+button:hover{transform:scale(1.03);background:#ffffff1c}
+button.p{background:linear-gradient(90deg,var(--a),var(--b));border:0;color:#fff;box-shadow:0 6px 20px #7c5cff55}
+button.opt{display:block;width:100%;text-align:start;margin:8px 0;font-weight:400}
+button.ok{border-color:var(--ok);background:#34d39922}button.bad{border-color:var(--bad);background:#fb718522}
+pre{direction:ltr;text-align:left;background:#0b0d1d;border:1px solid #ffffff14;padding:16px;border-radius:14px;overflow-x:auto;color:#9ef0d0;font-size:14px;line-height:1.7}
+input{font:inherit;width:100%;padding:14px;margin:6px 0;border:1px solid #ffffff2a;background:#ffffff0d;color:var(--ink);border-radius:14px;outline:0}
+input:focus{border-color:var(--b)}
+.t{color:var(--ok);font-weight:600}.err{color:var(--bad)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pill{background:#ffffff14;border-radius:99px;padding:6px 14px;font-size:14px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+@media(min-width:640px){.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid .card{margin:0}}
 </style></head><body><main id="app"></main>
 <script>
 const tracks=[
-{id:'html',name:'أساسيات إنشاء المواقع (HTML)',blurb:'اتعلم تبني أول صفحة ويب بنفسك.',lessons:[
+{ic:'🌐',col:'#7c5cff',id:'html',name:'أساسيات إنشاء المواقع (HTML)',blurb:'اتعلم تبني أول صفحة ويب بنفسك.',lessons:[
 {t:'يعني إيه HTML؟',b:['HTML لغة بتوصف شكل صفحة الويب: عنوان، فقرة، صورة، لينك.','كل حاجة بتتكتب جوه علامات (tags) علامة فتح وعلامة قفل.'],c:'<h1>أهلاً يا عالم</h1>\n<p>ده أول موقع ليا</p>',q:'أنهي علامة بتعمل عنوان كبير؟',o:['<p>','<h1>','<img>'],a:1},
 {t:'الصور واللينكات',b:['اللينك بيتعمل بعلامة a وخاصية href.','الصورة بتتعمل بعلامة img وخاصية src.'],c:'<a href="https://example.com">اضغط هنا</a>\n<img src="photo.jpg" alt="صورة">',q:'الخاصية اللي بتحدد وجهة اللينك هي؟',o:['src','alt','href'],a:2},
 {t:'القوايم',b:['القايمة النقطية بتتعمل بعلامة ul، وكل عنصر جواها بعلامة li.'],c:'<ul>\n  <li>رياضيات</li>\n  <li>علوم</li>\n</ul>',q:'كل عنصر جوه القايمة بيتكتب بعلامة؟',o:['<li>','<ul>','<h2>'],a:0}]},
-{id:'py',name:'أساسيات البرمجة (Python)',blurb:'أول خطواتك في البرمجة بلغة سهلة.',lessons:[
+{ic:'🐍',col:'#22c55e',id:'py',name:'أساسيات البرمجة (Python)',blurb:'أول خطواتك في البرمجة بلغة سهلة.',lessons:[
 {t:'الطباعة والمتغيرات',b:['الأمر print بيطبع كلام على الشاشة.','المتغير مكان بنخزن فيه قيمة ونديله اسم.'],c:'name = "Eslam"\nprint("Hello", name)',q:'أنهي أمر بيطبع على الشاشة؟',o:['print','input','name'],a:0},
 {t:'الشروط if',b:['if بتخلي البرنامج ياخد قرار حسب شرط.'],c:'age = 15\nif age >= 18:\n    print("adult")\nelse:\n    print("young")',q:'لو age = 15، البرنامج هيطبع إيه؟',o:['adult','young','خطأ'],a:1},
 {t:'التكرار for',b:['for بتكرر أمر عدد مرات معين.'],c:'for i in range(3):\n    print(i)',q:'الكود بيطبع كام رقم؟',o:['2','3','4'],a:1}]},
-{id:'edit',name:'أساسيات المونتاج',blurb:'اتعلم تقص وترتب وتطلّع فيديو نضيف.',lessons:[
+{ic:'🎬',col:'#f97316',id:'edit',name:'أساسيات المونتاج',blurb:'اتعلم تقص وترتب وتطلّع فيديو نضيف.',lessons:[
 {t:'التايم لاين',b:['التايم لاين هو الشريط اللي بترتب عليه المقاطع بالترتيب الزمني، صوت وصورة.'],q:'التايم لاين بنرتب عليه إيه؟',o:['المقاطع بالترتيب الزمني','كلمات السر','الألوان بس'],a:0},
 {t:'القص والتقطيع',b:['بنقص الأجزاء الزيادة من أول المقطع وآخره علشان الفيديو يبقى سريع وماله حشو.'],q:'ليه بنقص أول وآخر المقطع؟',o:['علشان نزود الحجم','نشيل الحشو ونسرّع الإيقاع','نغيّر اللغة'],a:1},
 {t:'الصوت والموسيقى',b:['خلي صوت الكلام أعلى من الموسيقى، والموسيقى في الخلفية بس.'],q:'الأعلى في الصوت يكون؟',o:['الموسيقى','الكلام','الاتنين زي بعض'],a:1}]}];
@@ -29,14 +49,14 @@ let users=JSON.parse(localStorage.getItem('u')||'{}'),me=localStorage.getItem('m
 const save=()=>localStorage.setItem('u',JSON.stringify(users));
 const done=()=>users[me].done||(users[me].done={});
 const e=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function auth(){app.innerHTML=`<h1>تعلّم مهارة مجانًا</h1><p class=sub>${mode=='login'?'سجّل دخولك':'اعمل حساب جديد'}</p><input id=n placeholder="اسم المستخدم"><input id=p type=password placeholder="كلمة السر"><p class=err>${msg}</p><button class=p onclick="go()">${mode=='login'?'دخول':'إنشاء حساب'}</button><br><button onclick="mode=mode=='login'?'signup':'login';msg='';auth()">${mode=='login'?'معنديش حساب':'عندي حساب'}</button><p class=sub>نموذج أولي: الحسابات بتتحفظ على جهازك بس لحد ما نوصل قاعدة بيانات حقيقية.</p>`}
+function auth(){app.innerHTML=`<div class=hero><span class=big>🚀</span><h1><span class=grad>تعلّم مهارة</span> مجانًا</h1><p class=sub>برمجة ومونتاج بالعربي، من الصفر وبدون فلوس</p></div><div class=card><h2 style=margin-top:0>${mode=='login'?'سجّل دخولك':'اعمل حساب جديد'}</h2><input id=n placeholder="اسم المستخدم"><input id=p type=password placeholder="كلمة السر"><p class=err>${msg}</p><button class=p onclick="go()">${mode=='login'?'دخول':'إنشاء حساب'}</button><br><button onclick="mode=mode=='login'?'signup':'login';msg='';auth()">${mode=='login'?'معنديش حساب':'عندي حساب'}</button><p class=sub>نموذج أولي: الحسابات بتتحفظ على جهازك بس لحد ما نوصل قاعدة بيانات حقيقية.</p></div>`}
 function go(){const n=document.getElementById('n').value.trim(),p=document.getElementById('p').value;if(n.length<3||p.length<4){msg='الاسم 3 حروف على الأقل وكلمة السر 4 على الأقل';return auth()}
 if(mode=='signup'){if(users[n]){msg='الاسم ده موجود';return auth()}users[n]={p,done:{}};save()}else if(!users[n]||users[n].p!==p){msg='بيانات غلط';return auth()}
 me=n;localStorage.setItem('me',n);msg='';home()}
 function home(){tr=null;const t=tracks.reduce((a,x)=>a+x.lessons.length,0),d=Object.keys(done()).length;
-app.innerHTML=`<h1>أهلاً ${e(me)}</h1><p class=t>${d} من ${t} درس خلصت</p>`+tracks.map(x=>`<div class=card><b>${x.name}</b><p class=sub>${x.blurb}</p><span class=t>${x.lessons.filter((_,j)=>done()[x.id+j]).length}/${x.lessons.length}</span><br><button class=p onclick="open_('${x.id}',0)">ابدأ</button></div>`).join('')+`<button onclick="localStorage.removeItem('me');me=null;auth()">خروج</button>`}
+app.innerHTML=`<div class=top><span class=pill>👋 ${e(me)}</span><button onclick="localStorage.removeItem('me');me=null;auth()">خروج</button></div><div class=hero><span class=big>🎓</span><h1>يلا نتعلم <span class=grad>مهارة جديدة</span></h1><p class=sub>اختار مسار وابدأ، كل درس دقيقتين وسؤال سريع.</p><div class=bar><i style="width:${Math.round(d/t*100)}%"></i></div><span class=t>${d} من ${t} درس خلصت</span></div><div class=grid>`+tracks.map((x,n)=>{const c=x.lessons.filter((_,j)=>done()[x.id+j]).length;return `<div class=card style="animation-delay:${n*.1}s"><div class=ic style="background:${x.col}33">${x.ic}</div><b style="font-size:18px">${x.name}</b><p class=sub>${x.blurb}</p><div class=bar><i style="width:${c/x.lessons.length*100}%;background:${x.col}"></i></div><span class=sub>${c}/${x.lessons.length} دروس</span><br><button class=p onclick="open_('${x.id}',0)">${c?'كمّل':'ابدأ'} ←</button></div>`}).join('')+`</div>`}
 function open_(id,k){tr=tracks.find(x=>x.id==id);i=k;pick=null;lesson()}
-function lesson(){const l=tr.lessons[i],k=tr.id+i;app.innerHTML=`<p class=sub>${tr.name}، درس ${i+1} من ${tr.lessons.length}</p><h1>${l.t}</h1>`+l.b.map(p=>`<p>${p}</p>`).join('')+(l.c?`<pre>${e(l.c)}</pre>`:'')+`<h2>سؤال سريع</h2><p>${l.q}</p>`+l.o.map((o,j)=>`<button class="opt ${pick===j?(j==l.a?'ok':'bad'):''}" onclick="ans(${j})">${e(o)}</button>`).join('')+(pick!==null?`<p class="${pick==l.a?'t':'err'}">${pick==l.a?'إجابة صح، أحسنت!':'جرّب تاني'}</p>`:'')+`<div>${i>0?'<button onclick="open_(tr.id,i-1)">السابق</button> ':''}${i<tr.lessons.length-1?'<button class=p onclick="open_(tr.id,i+1)">التالي</button> ':''}<button onclick="home()">كل المسارات</button></div>`}
+function lesson(){const l=tr.lessons[i],k=tr.id+i;app.innerHTML=`<div class=top><span class=pill>${tr.ic} ${tr.name}</span><span class=pill>${i+1}/${tr.lessons.length}</span></div><div class=bar><i style="width:${(i+1)/tr.lessons.length*100}%"></i></div><h1 style=margin-top:20px>${l.t}</h1>`+l.b.map(p=>`<p>${p}</p>`).join('')+(l.c?`<pre>${e(l.c)}</pre>`:'')+`<h2>سؤال سريع</h2><p>${l.q}</p>`+l.o.map((o,j)=>`<button class="opt ${pick===j?(j==l.a?'ok':'bad'):''}" onclick="ans(${j})">${e(o)}</button>`).join('')+(pick!==null?`<p class="${pick==l.a?'t':'err'}">${pick==l.a?'إجابة صح، أحسنت!':'جرّب تاني'}</p>`:'')+`<div class=nav>${i>0?'<button onclick="open_(tr.id,i-1)">→ السابق</button> ':''}${i<tr.lessons.length-1?'<button class=p onclick="open_(tr.id,i+1)">التالي ←</button> ':''}<button onclick="home()">كل المسارات</button></div>`}
 function ans(j){pick=j;if(j==tr.lessons[i].a){done()[tr.id+i]=1;save()}lesson()}
 me&&users[me]?home():auth();
 </script></body></html>
