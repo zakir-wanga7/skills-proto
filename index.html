@@ -201,7 +201,7 @@ function render(){
  app.innerHTML=head()+({home,track,lesson}[view.n]||home)();
 }
 function login(){
- app.innerHTML=`<div class=hero><span class=big>🎓</span><h1><span class=grad>اتعلّم مهارة</span></h1><p class=sub>برمجة ومونتاج وتصميم بالعربي ببلاش</p></div><div class=card><h2 style=margin-top:0>سجّل دخولك بحساب جوجل</h2><p class=sub>علشان تقدمك يتحفظ وتكمل من أي جهاز.</p><button class="p wide" onclick="google()">🔐 الدخول بحساب Gmail</button><p class=err id=err>${msg}</p><button class=wide onclick="localStorage.setItem('guest','1');guest=true;go('home')">تصفح بدون حساب</button></div>`}
+ app.innerHTML=`<div class=hero><span class=big>🎓</span><h1><span class=grad>اتعلّم مهارة</span></h1><p class=sub>برمجة ومونتاج وتصميم بالعربي ببلاش</p></div><div class=card><h2 style=margin-top:0>سجّل دخولك بحساب جوجل</h2><p class=sub>تقدمك بيتحفظ على الجهاز ده (الحفظ على حسابك لسه تجريبي).</p><button class="p wide" onclick="google()">🔐 الدخول بحساب Gmail</button><p class=err id=err>${msg}</p><button class=wide onclick="localStorage.setItem('guest','1');guest=true;go('home')">تصفح بدون حساب</button></div>`}
 async function google(){if(!sb){msg='مشكلة في تحميل خدمة الدخول، جرب تاني';return login()}
  const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error){msg='تعذر الدخول: '+error.message;login()}}
 async function logout(){if(sb)await sb.auth.signOut();user=null;guest=false;localStorage.removeItem('guest');go('home')}
